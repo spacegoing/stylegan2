@@ -128,18 +128,35 @@ Run 'python %(prog)s <subcommand> --help' for subcommand help.''',
     subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
 
     parser_generate_images = subparsers.add_parser('generate-images', help='Generate images')
-    parser_generate_images.add_argument('--network', help='Network pickle filename', dest='network_pkl', required=True)
-    parser_generate_images.add_argument('--seeds', type=_parse_num_range, help='List of random seeds', required=True)
-    parser_generate_images.add_argument('--truncation-psi', type=float, help='Truncation psi (default: %(default)s)', default=0.5)
-    parser_generate_images.add_argument('--result-dir', help='Root directory for run results (default: %(default)s)', default='results', metavar='DIR')
+    parser_generate_images.add_argument('--network', help='Network pickle filename',
+                            dest='network_pkl', required=True)
+    parser_generate_images.add_argument('--seeds', type=_parse_num_range,
+                            help='List of random seeds', required=True)
+    parser_generate_images.add_argument('--truncation-psi', type=float,
+                            help='Truncation psi (default: %(default)s)', default=0.5)
+    parser_generate_images.add_argument('--result-dir',
+                            help='Root directory for run results (default: %(default)s)',
+                            default='results', metavar='DIR')
 
-    parser_style_mixing_example = subparsers.add_parser('style-mixing-example', help='Generate style mixing video')
-    parser_style_mixing_example.add_argument('--network', help='Network pickle filename', dest='network_pkl', required=True)
-    parser_style_mixing_example.add_argument('--row-seeds', type=_parse_num_range, help='Random seeds to use for image rows', required=True)
-    parser_style_mixing_example.add_argument('--col-seeds', type=_parse_num_range, help='Random seeds to use for image columns', required=True)
-    parser_style_mixing_example.add_argument('--col-styles', type=_parse_num_range, help='Style layer range (default: %(default)s)', default='0-6')
-    parser_style_mixing_example.add_argument('--truncation-psi', type=float, help='Truncation psi (default: %(default)s)', default=0.5)
-    parser_style_mixing_example.add_argument('--result-dir', help='Root directory for run results (default: %(default)s)', default='results', metavar='DIR')
+    parser_style_mixing_example = subparsers.add_parser('style-mixing-example',
+                            help='Generate style mixing video')
+    parser_style_mixing_example.add_argument('--network',
+                            help='Network pickle filename', dest='network_pkl', required=True)
+    parser_style_mixing_example.add_argument('--row-seeds',
+                            type=_parse_num_range,
+                            help='Random seeds to use for image rows', required=True)
+    parser_style_mixing_example.add_argument('--col-seeds',
+                            type=_parse_num_range,
+                            help='Random seeds to use for image columns', required=True)
+    parser_style_mixing_example.add_argument('--col-styles',
+                            type=_parse_num_range,
+                            help='Style layer range (default: %(default)s)', default='0-6')
+    parser_style_mixing_example.add_argument('--truncation-psi',
+                            type=float,
+                            help='Truncation psi (default: %(default)s)', default=0.5)
+    parser_style_mixing_example.add_argument('--result-dir',
+                            help='Root directory for run results (default: %(default)s)',
+                            default='results', metavar='DIR')
 
     args = parser.parse_args()
     kwargs = vars(args)
