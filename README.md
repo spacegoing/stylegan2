@@ -1,3 +1,94 @@
+# Stylegan2 Align, Project and Train
+
+This is a combination of code from following repos:
+  - [NVlabs/stylegan2: original repo](https://github.com/NVlabs/stylegan2)
+  - [rolux/stylegan2encoder: modified projector](https://github.com/rolux/stylegan2encoder)
+  - [ak9250/stylegan2: training stylegan2](https://github.com/ak9250/stylegan2)
+  - [iyaja/stylegan-encoder: stylemix](https://github.com/iyaja/stylegan-encoder)
+
+### Latent direction trained data taken from here (stylegan2directions):
+ - https://hostb.org/NCM provided by [robertluxemburg](https://twitter.com/robertluxemburg/status/1207094937902288899)
+
+### Here is a detailed Tutorial on stylegan, but many suggestions apply to stylegan2 too:
+ - https://www.gwern.net/Faces#data-preparation
+
+### Generating latent representation of your images, using the modified projector.
+
+You can generate latent representations of your own images using two scripts:
+
+0. Copy images with faces to raw_images/
+
+1. Extract and align faces from images
+
+    >`python align_images.py raw_images/ aligned_images/`
+
+2. Generating latent representation of your images
+
+    >`python project_images.py aligned_images/ face_datasets/generated_images/`
+
+3. Generate transitions from generated_images
+
+    >`python transition.py face_datasets/generated_images/`
+      ![Alt Text](samples/transition_jdepp.gif)
+
+
+4. Generate animations from generated_images
+ - Download stylegan2directions from [here](https://hostb.org/NCM) and extract to the root folder of your project.
+ - [Optional] Download face_datasets from [here](https://drive.google.com/file/d/14GGDo47b4kHebO1Q1bDh5fYLNahd7Z3J/view?usp=sharing) and extract to the root folder of your project.
+ (Image Copyright belongs to the original owners, I got them from Google/Pinterest.)
+
+    Some points:
+    * Smile works best, blink is ok, yes and no are bad.
+    * I find that the face moves or the structure changes for yes and no and to a lesser extent for blink.
+    * How to generate these animations without these artifacts?
+
+    >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=smile`
+      ![Alt Text](samples/smile.gif)
+
+    >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=blink`
+      ![Alt Text](samples/blink.gif)
+
+
+    >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=yes`
+      ![Alt Text](samples/yes.gif)
+
+
+    >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=no`
+      ![Alt Text](samples/no.gif)
+
+
+    Or you can customise your options. See [animate.py](./animate.py) for details.
+      >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --dir-file=stylegan2directions/smile.npy --start=-5 --stop=15 --repeat 2 --steps=10 --reverse`
+
+5. Do some style mixing, you can either mix a persons expression or mix the makeup.
+
+    The style mixing here is different from the original repo. I have used the technique from - [iyaja/stylegan-encoder](https://github.com/iyaja/stylegan-encoder)
+
+    Instead of using the average latent and truncation, here, the latents from the rows and columns are mixed in 'col-ratio'.
+    Here the latents are [18, 512]. Only the column latents from col-styles are mixed.
+
+    Make up mix works better. Expression distorts face - resultant face neither looks like a column face nor a row face. How to fix this?
+
+
+    >`python run_style_mixer.py --mode=makeup --row-imgs-dir=face_datasets/jdepp/ --col-imgs-dir=face_datasets/avatars/`
+      ![Alt Text](samples/makeup_depp_avatar.jpg)
+
+
+    >`python run_style_mixer.py --mode=makeup --row-imgs-dir=face_datasets/avatars/ --col-imgs-dir=face_datasets/avatars/`
+      ![Alt Text](samples/makeup_avtar_avtar.jpg)
+
+
+    >`python run_style_mixer.py --mode=expression --row-imgs-dir=face_datasets/jdepp/ --col-imgs-dir=face_datasets/mrbean/`
+      ![Alt Text](samples/expression_jdepp_mrbean.jpg)
+
+
+    Or you can customise your options. Try 'python run_style_mixer.py -h' for options.
+    >`python run_style_mixer.py --row-imgs-dir=avatars --col-imgs-dir=avatars --col-styles='0-6' --col-ratio=0.7`
+
+
+6. After mixing styles, the resultant latents are stored in the results folder. You can use these to further generate the transition video. You will have to handpick some npy files from results and create a new folder and copy them there and then run the [transition.py](transition.py) script.
+
+## Original Readme
 ## StyleGAN2 &mdash; Official TensorFlow Implementation
 
 ![Teaser image](./docs/stylegan2-teaser-1024x256.png)

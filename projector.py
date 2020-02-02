@@ -14,6 +14,7 @@ from training import misc
 #----------------------------------------------------------------------------
 '''
 Changes made as per: https://github.com/rolux/stylegan2encoder/blob/master/project_images.py
+Use [N, 18, 512] instead of [N, 1, 1512]
 '''
 
 class Projector:
@@ -74,6 +75,7 @@ class Projector:
         # Find dlatent stats.
         self._info('Finding W midpoint and stddev using %d samples...' % self.dlatent_avg_samples)
         latent_samples = np.random.RandomState(123).randn(self.dlatent_avg_samples, *self._Gs.input_shapes[0][1:])
+        # this doesnt work well with just [N, 1, 512], but works well with [N, 18, 512]
         dlatent_samples = self._Gs.components.mapping.run(latent_samples, None) # [N, 18, 512]
         self._dlatent_avg = np.mean(dlatent_samples, axis=0, keepdims=True) # [N, 18, 512]
         self._dlatent_std = (np.sum((dlatent_samples - self._dlatent_avg) ** 2) / self.dlatent_avg_samples) ** 0.5

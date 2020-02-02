@@ -54,10 +54,13 @@ def natural_keys(text):
 
 
 def generate_transition(src_dir, network_pkl, fps, fpe, shrink):
-    print("Loading W vectors...")
+    print(f"Loading W vectors from {src_dir}")
     dlatents_files = glob.glob(src_dir + '/*.npy')
     dlatents_files.sort(key=natural_keys)
     print(dlatents_files)
+    if len(dlatents_files) == 0:
+        print(f'No latent files found in path: {src_dir}')
+        return
 
     tflib.init_tf()
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
@@ -92,13 +95,14 @@ def main():
     parser = argparse.ArgumentParser(description='Get the transition of projected images from a given directory')
     parser.add_argument('src_dir', help='Directory with projected npy images')
     # parser.add_argument('--network-pkl', default='gdrive:networks/stylegan2-ffhq-config-f.pkl', help='StyleGAN2 network pickle filename')
-    parser.add_argument('--network-pkl', default='models/stylegan2-ffhq-config-f.pkl', help='StyleGAN2 network pickle filename')
-    parser.add_argument('--fps', default=30, help='fps of output video')
-    parser.add_argument('--fpe', default=60, help='Number of frames per endpoint')
+    parser.add_argument('--network-pkl', default='models/stylegan2-ffhq-config-f.pkl',
+                            help='StyleGAN2 network pickle filename')
+    parser.add_argument('--fps', default=30, help='fps of output video', type=int)
+    parser.add_argument('--fpe', default=60, help='Number of frames per endpoint', type=int)
     parser.add_argument('--shrink', default=1, help='How much to shrink the output image.\
-        Set to 1 to get image of size 1024x1024, 2: 512, 4: 256 and so on.')
-    parser.add_argument('--result-dir', 
-                            help='Root directory for run results (default: %(default)s)', 
+        Set to 1 to get image of size 1024x1024, 2: 512, 4: 256 and so on.', type=int)
+    parser.add_argument('--result-dir',
+                            help='Root directory for run results (default: %(default)s)',
                             default='results', metavar='DIR')
     args = parser.parse_args()
     kwargs = vars(args)
@@ -108,7 +112,7 @@ def main():
     sc.submit_target = dnnlib.SubmitTarget.LOCAL
     sc.local.do_not_copy_source_files = True
     sc.run_dir_root = kwargs.pop('result_dir')
-    sc.run_desc = 'transition-' + args.src_dir.split('/')[-2] 
+    sc.run_desc = 'transition-' + args.src_dir.split('/')[-2] #TODO: remove hardcoding.
 
     dnnlib.submit_run(sc, 'transition.generate_transition', **kwargs)
 

@@ -64,8 +64,8 @@ def animate(network_pkl, in_file, mode, dir_file, start, stop, steps, reverse, r
     elif mode == "yes":
         # see comments in the if-else statement.
         dir_file = 'stylegan2directions/pitch.npy'
-        start = -15 
-        stop = 15 
+        start = -15
+        stop = 15
         repeat = 0
         reverse = True
         steps = 8
@@ -97,7 +97,7 @@ def animate(network_pkl, in_file, mode, dir_file, start, stop, steps, reverse, r
 
     set_images = Gs.components.synthesis.run(latent_batch, **Gs_syn_kwargs)
     first_image = np.repeat(np.expand_dims(set_images[0], axis=0), 20, axis=0)
-    
+
     if reverse:
         rev_images = np.flipud(set_images)
         set_images = np.concatenate((set_images, rev_images), axis=0)
@@ -116,24 +116,24 @@ def animate(network_pkl, in_file, mode, dir_file, start, stop, steps, reverse, r
 
 ################################################################################
 _examples = """
-# blink
-python animate.py --in-file=face_datasets/jdepp/4_01.npy 
-                    --dir-file=stylegan2directions/eyes_open.npy 
+# eyes
+python animate.py --in-file=face_datasets/jdepp/4_01.npy
+                    --dir-file=stylegan2directions/eyes_open.npy
                     --start=30 --stop=-40 --repeat 2 --reverse --steps=5
 
 # smile
-python animate.py --in-file=face_datasets/jdepp/4_01.npy 
-                    --dir-file=stylegan2directions/smile.npy 
+python animate.py --in-file=face_datasets/jdepp/4_01.npy
+                    --dir-file=stylegan2directions/smile.npy
                     --start=-1 --stop=15 --repeat 0 --steps=30
 
-# yes
-python animate.py --in-file=face_datasets/jdepp/4_01.npy 
-                    --dir-file=stylegan2directions/pitch.npy 
+# pitch
+python animate.py --in-file=face_datasets/jdepp/4_01.npy
+                    --dir-file=stylegan2directions/pitch.npy
                     --start=15 --stop=-15 --repeat 2 --steps=8 --reverse
 
-# no
-python animate.py --in-file=face_datasets/jdepp/4_01.npy 
-                    --dir-file=stylegan2directions/yaw.npy 
+# yaw
+python animate.py --in-file=face_datasets/jdepp/4_01.npy
+                    --dir-file=stylegan2directions/yaw.npy
                     --start=15 --stop=-15 --repeat 0 --steps=8
 
 """
@@ -157,7 +157,7 @@ def main():
     parser.add_argument('--dir-file',
                             help='Path to direction npy file')
     parser.add_argument('--steps',
-                            help='Number of steps from start to stop',
+                            help='Number of steps from start to stop. Higher the steps, smoother the interpolation',
                             default=30)
     # TODO: instead of start and stop, accept an array of intermediate values.
     parser.add_argument('--start',
@@ -175,8 +175,8 @@ def main():
                             help='How many times should the interpolation be repeated?',
                             default=2,
                             type=int)
-    parser.add_argument('--result-dir', 
-                            help='Root directory for run results (default: %(default)s)', 
+    parser.add_argument('--result-dir',
+                            help='Root directory for run results (default: %(default)s)',
                             default='results', metavar='DIR')
 
     args = parser.parse_args()
