@@ -6,6 +6,7 @@
 .nv
 .cache
 
+face_datasets
 ffhq_network.zip
 __pycache__/*
 dnnlib/__pycache__/*
