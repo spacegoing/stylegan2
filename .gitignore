@@ -4,9 +4,8 @@
 .vscode
 .keras
 .nv
-.stylegan2-cache
+.cache
 
-frames377298/*
 ffhq_network.zip
 __pycache__/*
 dnnlib/__pycache__/*

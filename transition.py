@@ -94,13 +94,14 @@ def generate_transition(src_dir, network_pkl, fps, fpe, shrink):
 def main():
     parser = argparse.ArgumentParser(description='Get the transition of projected images from a given directory')
     parser.add_argument('src_dir', help='Directory with projected npy images')
-    # parser.add_argument('--network-pkl', default='gdrive:networks/stylegan2-ffhq-config-f.pkl', help='StyleGAN2 network pickle filename')
-    parser.add_argument('--network-pkl', default='models/stylegan2-ffhq-config-f.pkl',
+    parser.add_argument('--network-pkl',
+                            default='gdrive:networks/stylegan2-ffhq-config-f.pkl',
+                            # default='models/stylegan2-ffhq-config-f.pkl',
                             help='StyleGAN2 network pickle filename')
     parser.add_argument('--fps', default=30, help='fps of output video', type=int)
     parser.add_argument('--fpe', default=60, help='Number of frames per endpoint', type=int)
     parser.add_argument('--shrink', default=1, help='How much to shrink the output image.\
-        Set to 1 to get image of size 1024x1024, 2: 512, 4: 256 and so on.', type=int)
+                            Set to 1 to get image of size 1024x1024, 2: 512, 4: 256 and so on.', type=int)
     parser.add_argument('--result-dir',
                             help='Root directory for run results (default: %(default)s)',
                             default='results', metavar='DIR')

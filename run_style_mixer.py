@@ -148,8 +148,9 @@ def main():
     )
 
     parser.add_argument('--network',
-                            default='models/stylegan2-ffhq-config-f.pkl',
-                            help='Network pickle filename', dest='network_pkl') #, required=True)
+                            # default='models/stylegan2-ffhq-config-f.pkl',
+                            default='gdrive:networks/stylegan2-ffhq-config-f.pkl',
+                            help='Network pickle filename', dest='network_pkl')
     parser.add_argument('--row-imgs-dir',
                             help='Files for image rows', required=True)
     parser.add_argument('--col-imgs-dir',

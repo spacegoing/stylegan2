@@ -117,25 +117,36 @@ def animate(network_pkl, in_file, mode, dir_file, start, stop, steps, reverse, r
 ################################################################################
 _examples = """
 # eyes
-python animate.py --in-file=face_datasets/jdepp/4_01.npy
-                    --dir-file=stylegan2directions/eyes_open.npy
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/eyes_open.npy \
                     --start=30 --stop=-40 --repeat 2 --reverse --steps=5
 
 # smile
-python animate.py --in-file=face_datasets/jdepp/4_01.npy
-                    --dir-file=stylegan2directions/smile.npy
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/smile.npy \
                     --start=-1 --stop=15 --repeat 0 --steps=30
 
 # pitch
-python animate.py --in-file=face_datasets/jdepp/4_01.npy
-                    --dir-file=stylegan2directions/pitch.npy
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/pitch.npy \
                     --start=15 --stop=-15 --repeat 2 --steps=8 --reverse
 
 # yaw
-python animate.py --in-file=face_datasets/jdepp/4_01.npy
-                    --dir-file=stylegan2directions/yaw.npy
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/yaw.npy \
                     --start=15 --stop=-15 --repeat 0 --steps=8
 
+# age
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/age.npy \
+                    --start=-15 --stop=15 --repeat 0 --steps=90 --reverse
+
+# gender
+python animate.py --in-file=face_datasets/jdepp/4_01.npy \
+                    --dir-file=stylegan2directions/gender.npy \
+                    --start=0 --stop=-15 --repeat 0 --steps=90 --reverse
+
+# see stylegan2directions dir for more options.
 """
 
 
@@ -147,7 +158,8 @@ def main():
     )
 
     parser.add_argument('--network',
-                            default='models/stylegan2-ffhq-config-f.pkl',
+                            default='gdrive:networks/stylegan2-ffhq-config-f.pkl',
+                            # default='models/stylegan2-ffhq-config-f.pkl',
                             help='Network pickle filename', dest='network_pkl')
     parser.add_argument('--in-file',
                             help='Path to projected npy file', required=True)

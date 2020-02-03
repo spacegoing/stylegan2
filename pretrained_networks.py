@@ -67,7 +67,7 @@ def load_networks(path_or_gdrive_path):
         return _cached_networks[path_or_url]
 
     if dnnlib.util.is_url(path_or_url):
-        stream = dnnlib.util.open_url(path_or_url, cache_dir='.stylegan2-cache')
+        stream = dnnlib.util.open_url(path_or_url, cache_dir='models')
     else:
         stream = open(path_or_url, 'rb')
 

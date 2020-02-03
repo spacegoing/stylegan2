@@ -1,4 +1,4 @@
-# Stylegan2 Align, Project and Train
+# Stylegan2 Align, Project, Animate, Mix Styles and Train
 
 This is a combination of code from following repos:
   - [NVlabs/stylegan2: original repo](https://github.com/NVlabs/stylegan2)
@@ -11,6 +11,26 @@ This is a combination of code from following repos:
 
 ### Here is a detailed Tutorial on stylegan, but many suggestions apply to stylegan2 too:
  - https://www.gwern.net/Faces#data-preparation
+
+### Downloading models:
+
+Sometimes, you might run out of quota while downloading models from gdrive. In such cases, you can manually download the following models and place them in models directory of your project:
+
+```
+stylegan2
+|--models
+|  |--shape_predictor_68_face_landmarks.dat
+|  |--stylegan2-ffhq-config-f.pkl
+|  |--vgg16_zhang_perceptual.pkl
+|  |--inception_v3_features.pkl # for training only
+```
+
+Download Links:
+- [Face Landmarks Predictor](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
+- [Stylegan2 Model - config f](https://drive.google.com/uc?id=1Mgh-jglZjgksupF0XLl0KzuOqd1LXcoE)
+- [VGG16 Perceptual](https://drive.google.com/uc?id=1MzY4MFpZzE-mNS26pzhYlWN-4vMm2ytu)
+- [Inception V3 model](https://drive.google.com/uc?id=1MzTY44rLToO5APn8TZmfR7_ENSe5aZUn)
+
 
 ### Generating latent representation of your images, using the modified projector.
 
@@ -29,13 +49,16 @@ You can generate latent representations of your own images using two scripts:
 3. Generate transitions from generated_images
 
     >`python transition.py face_datasets/generated_images/`
+
       ![Alt Text](samples/transition_jdepp.gif)
 
 
 4. Generate animations from generated_images
  - Download stylegan2directions from [here](https://hostb.org/NCM) and extract to the root folder of your project.
- - [Optional] Download face_datasets from [here](https://drive.google.com/file/d/14GGDo47b4kHebO1Q1bDh5fYLNahd7Z3J/view?usp=sharing) and extract to the root folder of your project.
- (Image Copyright belongs to the original owners, I got them from Google/Pinterest.)
+ - [Optional] Download face_datasets from [here](https://drive.google.com/file/d/14GGDo47b4kHebO1Q1bDh5fYLNahd7Z3J/view?usp=sharing) and extract to the root folder of your project. (Image Copyright belongs to the original owners, I got them from Google/Pinterest.)
+ - Instead of 'face_datasets', you can generate some faces using random latents.
+    > python run_generator.py generate-images --network=gdrive:networks/stylegan2-ffhq-config-f.pkl --seeds=6600-6625 --truncation-psi=0.5
+
 
     Some points:
     * Smile works best, blink is ok, yes and no are bad.
@@ -57,7 +80,7 @@ You can generate latent representations of your own images using two scripts:
       ![Alt Text](samples/no.gif)
 
 
-    Or you can customise your options. See [animate.py](./animate.py) for details.
+    Or you can customise your options. exec '>python [animate.py](animate.py) -h' for more examples.
       >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --dir-file=stylegan2directions/smile.npy --start=-5 --stop=15 --repeat 2 --steps=10 --reverse`
 
 5. Do some style mixing, you can either mix a persons expression or mix the makeup.

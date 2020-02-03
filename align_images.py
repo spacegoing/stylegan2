@@ -38,7 +38,7 @@ if __name__ == "__main__":
     args, other_args = parser.parse_known_args()
 
     landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
-                                               LANDMARKS_MODEL_URL, cache_subdir='temp'))
+                                               LANDMARKS_MODEL_URL, cache_subdir='models'))
 
     # landmarks_model_path = 'shape_predictor_68_face_landmarks.dat'
     RAW_IMAGES_DIR = args.raw_dir
