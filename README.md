@@ -100,7 +100,7 @@ You can generate latent representations of your own images using two scripts:
     Instead of using the average latent and truncation, here, the latents from the rows and columns are mixed in 'col-ratio'.
     Here the latents are [18, 512]. Only the column latents from col-styles are mixed.
 
-    Make up mix works better. Expression distorts face - resultant face neither looks like a column face nor a row face. How to fix this?
+    Makeup mix works better. Expression distorts face - resultant face neither looks like a column face nor a row face. How to fix this?
 
 
     >`python run_style_mixer.py --mode=makeup --row-imgs-dir=face_datasets/jdepp/ --col-imgs-dir=face_datasets/avatars/`
