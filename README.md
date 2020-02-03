@@ -1,5 +1,7 @@
 # Stylegan2 Align, Project, Animate, Mix Styles and Train
 
+This is a fork of stylegan2, with some easy-to-use util functions to generate animations and mix styles.
+
 This is a combination of code from following repos:
   - [NVlabs/stylegan2: original repo](https://github.com/NVlabs/stylegan2)
   - [rolux/stylegan2encoder: modified projector](https://github.com/rolux/stylegan2encoder)
@@ -9,7 +11,7 @@ This is a combination of code from following repos:
 ### Latent direction trained data taken from here (stylegan2directions):
  - https://hostb.org/NCM provided by [robertluxemburg](https://twitter.com/robertluxemburg/status/1207094937902288899)
 
-### Here is a detailed Tutorial on stylegan, but many suggestions apply to stylegan2 too:
+### Here is a detailed overview on stylegan-v1, but many suggestions apply to stylegan2 too:
  - https://www.gwern.net/Faces#data-preparation
 
 ### Downloading models:
@@ -66,17 +68,21 @@ You can generate latent representations of your own images using two scripts:
     * How to generate these animations without these artifacts?
 
     >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=smile`
+
       ![Alt Text](samples/smile.gif)
 
     >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=blink`
+
       ![Alt Text](samples/blink.gif)
 
 
     >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=yes`
+
       ![Alt Text](samples/yes.gif)
 
 
     >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --mode=no`
+
       ![Alt Text](samples/no.gif)
 
 
