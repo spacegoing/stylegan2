@@ -83,6 +83,16 @@ You can generate latent representations of your own images using two scripts:
     Or you can customise your options. exec '>python [animate.py](animate.py) -h' for more examples.
       >`python animate.py --in-file=face_datasets/jdepp/4_01.npy --dir-file=stylegan2directions/smile.npy --start=-5 --stop=15 --repeat 2 --steps=10 --reverse`
 
+    Some samples of age and gender interpolation:
+
+    Age:
+
+      ![Alt Text](samples/age.gif)
+
+    Gender:
+
+      ![Alt Text](samples/gender.gif)
+
 5. Do some style mixing, you can either mix a persons expression or mix the makeup.
 
     The style mixing here is different from the original repo. I have used the technique from - [iyaja/stylegan-encoder](https://github.com/iyaja/stylegan-encoder)
