@@ -7,6 +7,7 @@ This is a combination of code from following repos:
   - [rolux/stylegan2encoder: modified projector](https://github.com/rolux/stylegan2encoder)
   - [ak9250/stylegan2: training stylegan2](https://github.com/ak9250/stylegan2)
   - [iyaja/stylegan-encoder: stylemix](https://github.com/iyaja/stylegan-encoder)
+  - [ShenYujun/InterFaceGAN: linear interpolation logic](https://github.com/ShenYujun/InterFaceGAN/)
 
 ### Latent direction trained data taken from here (stylegan2directions):
  - https://hostb.org/NCM provided by [robertluxemburg](https://twitter.com/robertluxemburg/status/1207094937902288899)
