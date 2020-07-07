@@ -513,6 +513,7 @@ def create_from_images(tfrecord_dir, image_dir, shuffle):
     if resolution != 2 ** int(np.floor(np.log2(resolution))):
         error('Input image resolution must be a power-of-two')
     if channels not in [1, 3]:
+        print(image_filenames)
         error('Input images must be stored as RGB or grayscale')
 
     with TFRecordExporter(tfrecord_dir, len(image_filenames)) as tfr:
