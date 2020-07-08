@@ -1,13 +1,14 @@
-import numpy as np
-import random
-import glob
-import re
 import argparse
-import moviepy.editor
-
+import numpy as np
+import PIL.Image
 import dnnlib
 import dnnlib.tflib as tflib
 import pretrained_networks
+import random
+import re
+import glob
+import moviepy.editor
+
 
 
 def get_latent_interpolation(endpoints, num_frames_per, mode, shuffle):
