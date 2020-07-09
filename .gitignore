@@ -8,21 +8,10 @@
 
 face_datasets
 ffhq_network.zip
-__pycache__/*
-dnnlib/__pycache__/*
-dnnlib/submission/__pycache__/*
-dnnlib/submission/internal/__pycache__/*
-dnnlib/tflib/__pycache__/*
-dnnlib/tflib/_cudacache/*
-dnnlib/tflib/ops/__pycache__/*
 ffhq_network/*
 models/*
-training/__pycache__/*
 results/
 datasets/*
-encoder/__pycache__/*
-metrics/__pycache__/*
-training/__pycache__/*
 ffhq_dataset/__pycache__/
 
 *.jpg

@@ -1,3 +1,7 @@
+# SG Adaption #
+
+- macos tiff to png: `sips -s format png *.tiff --out .`
+
 # Stylegan2 Align, Project, Animate, Mix Styles and Train
 
 This is a fork of stylegan2, with some easy-to-use util functions to generate animations and mix styles.
